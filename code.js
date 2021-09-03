@@ -81,7 +81,19 @@ function renderDogList() {
   let ulTag = document.querySelector("#dog_list");
   ulTag.innerHTML = "";    // Delete everything inside ul 
                           // including elements  
-  for(let d of dataModel){
+  
+              /* RENDER "NO DOGS!" WHEN THERES NO DOGS ON LISTS */
+
+            // if the array is empty, return "NO DOGS YET! 🙂"//
+
+if (dataModel.length === 0) {
+  newLiTag = document.createElement("li");
+  newLiTag.innerHTML = '<h3>NO DOGS YET 🙂</h3>';
+  ulTag.append(newLiTag);
+  return false;
+} 
+  
+                          for(let d of dataModel){
     lambda = document.createElement("li"); // create a list item
     lambda.innerHTML = `${d.name}! A ${d.age} year old ${d.breed}${(d.likesTreats?" who likes treats":"")}. `;
         // assign text of that element
@@ -94,13 +106,7 @@ function renderDogList() {
     ulTag.append(lambda); //append li to ul
   }
 }
-/* RENDER "NO DOGS!" WHEN THERES NO DOGS ON LISTS */
 
-// if the array is empty, return "NO DOGS YET! 🙂"//
-
-if (dataModel === undefined || dataModel == 0) {
-  datamodel.innerHTML = "NO DOGS YET 🙂";
-} 
 
 // The page loads, to render the dog list for the very first time.
 renderDogList();
